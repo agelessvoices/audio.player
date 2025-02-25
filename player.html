@@ -29,11 +29,15 @@
   const prevButton = document.getElementById('prev-button');
 
   const playlist = [
-    { title: "Song 1", src: "song1.mp3" },
-    { title: "Song 2", src: "song2.mp3" },
-    { title: "Song 3", src: "song3.mp3" },
-    // Add up to 5 songs
+    { title: "I Feel The Earth Move - Demo Track", src: "I Feel The Earth Move (3 Part) - Demo Track.mp3" },
+    { title: "I Feel The Earth Move (Part 1) - Learning Track", src: "I Feel The Earth Move (Part 1) - Learning Track.mp3" },
+    { title: "I Feel The Earth Move (Part 2) - Learning Track", src: "I Feel The Earth Move (Part 2) - Learning Track.mp3" },
+    { title: "I Feel The Earth Move (Part 3) - Learning Track", src: "I Feel The Earth Move (Part 3) - Learning Track.mp3" },
+
   ];
+
+  refreshPlaylistDisplay(); 
+loadSong(currentSongIndex); 
 
   let currentSongIndex = 0;
 

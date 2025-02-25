@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>HTML5 Audio Player</title>
+</head>
+<body>
+
+<div id="audio-player">
+  <audio id="my-audio" controls>
+    Your browser does not support the audio element.
+  </audio>
+
+  <div id="playlist">
+    </div>
+
+  <button id="play-button">Play</button>
+  <button id="pause-button">Pause</button>
+  <button id="next-button">Next</button>
+  <button id="prev-button">Previous</button>
+
+</div>
+
+<script>
+  const audioPlayer = document.getElementById('my-audio');
+  const playlistContainer = document.getElementById('playlist');
+  const playButton = document.getElementById('play-button');
+  const pauseButton = document.getElementById('pause-button');
+  const nextButton = document.getElementById('next-button');
+  const prevButton = document.getElementById('prev-button');
+
+  const playlist = [
+    { title: "Song 1", src: "song1.mp3" },
+    { title: "Song 2", src: "song2.mp3" },
+    { title: "Song 3", src: "song3.mp3" },
+    // Add up to 5 songs
+  ];
+
+  let currentSongIndex = 0;
+
+  function loadSong(index) {
+    const song = playlist[index];
+    audioPlayer.src = song.src;
+    audioPlayer.load(); // Important: Load the new source
+  }
+
+  function displayPlaylist() {
+      playlist.forEach((song, index) => {
+          const listItem = document.createElement('li');
+          listItem.textContent = song.title;
+          listItem.addEventListener('click', () => {
+              currentSongIndex = index;
+              loadSong(currentSongIndex);
+              audioPlayer.play();
+          });
+          playlistContainer.appendChild(listItem);
+      });
+  }
+
+  playButton.addEventListener('click', () => {
+    audioPlayer.play();
+  });
+
+  pauseButton.addEventListener('click', () => {
+    audioPlayer.pause();
+  });
+
+  nextButton.addEventListener('click', () => {
+    currentSongIndex = (currentSongIndex + 1) % playlist.length;
+    loadSong(currentSongIndex);
+    audioPlayer.play();
+  });
+
+  prevButton.addEventListener('click', () => {
+    currentSongIndex = (currentSongIndex - 1 + playlist.length) % playlist.length; // Handle wraparound
+    loadSong(currentSongIndex);
+    audioPlayer.play();
+  });
+
+  displayPlaylist();
+  loadSong(currentSongIndex); // Load the first song initially
+
+</script>
+
+</body>
+</html>
